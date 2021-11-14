@@ -120,6 +120,10 @@
     display: flex;
     align-items: center;
 
+    &:first-of-type .header__nav-link::before {
+      counter-set: nav-counter 0;
+    }
+
     @include responsive("mobile") {
       height: auto;
     }
