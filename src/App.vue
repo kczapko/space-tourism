@@ -20,8 +20,20 @@ export default {
     enter(el, done) {
       if (el.classList.contains("page--home")) {
         gsap.from(el, { opacity: 0, duration: 0.3 });
-        gsap.from(".header-home", { opacity: 0, x: -100, duration: 0.5 });
-        gsap.from(".header-home__link", {
+        gsap.fromTo(
+          el.querySelector(".header-home"),
+          {
+            opacity: 0,
+            x: -100,
+            duration: 0.5,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+          }
+        );
+        gsap.from(el.querySelector(".header-home__link"), {
           opacity: 0,
           x: 100,
           duration: 0.5,
@@ -34,8 +46,8 @@ export default {
     leave(el, done) {
       if (el.classList.contains("page--home")) {
         gsap.to(el, { opacity: 0, duration: 0.5 });
-        gsap.to(".header-home", { opacity: 0, x: -100, duration: 0.5 });
-        gsap.to(".header-home__link", {
+        gsap.to(el.querySelector(".header-home"), { opacity: 0, x: -100, duration: 0.5 });
+        gsap.to(el.querySelector(".header-home__link"), {
           opacity: 0,
           x: 100,
           duration: 0.5,
