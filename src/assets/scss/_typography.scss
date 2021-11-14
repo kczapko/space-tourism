@@ -89,7 +89,7 @@
   font-family: var(--font-barlow-condensed);
   font-size: 1.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.027em;
+  letter-spacing: 2.7px;
 
   @include responsive("tablet") {
     font-size: 1.4rem;
