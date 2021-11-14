@@ -1,0 +1,238 @@
+.header {
+  width: 100%;
+  max-width: 144rem;
+  margin: 40px auto 0;
+  height: 9.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+
+  @include responsive("tablet") {
+    margin: 0;
+  }
+
+  @include responsive("mobile") {
+    margin-top: 2.4rem;
+    height: auto;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    left: 16.7rem;
+    top: 50%;
+    height: 1px;
+    width: calc(100% - 16.7rem - 80rem);
+    background: rgba(255, 255, 255, 0.25);
+
+    @include responsive("tablet") {
+      display: none;
+    }
+  }
+
+  &__logo-link {
+    margin-left: 5.5rem;
+
+    @include responsive("tablet") {
+      margin-left: 3.9rem;
+    }
+
+    @include responsive("mobile") {
+      margin-left: 2.4rem;
+    }
+  }
+
+  &__logo {
+    display: block;
+
+    @include responsive("mobile") {
+      width: 4rem;
+    }
+  }
+
+  &__nav {
+    position: relative;
+    width: 83rem;
+    height: 100%;
+
+    @include responsive("tablet") {
+      width: auto;
+    }
+
+    @include responsive("mobile") {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 25.4rem;
+      height: 100vh;
+      transition: transform 250ms;
+      transform: translateX(100%);
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 200%;
+      background: rgba(255, 255, 255, 0.25);
+
+      @include responsive("mobile") {
+        background: rgba(0, 0, 0, 0.75);
+      }
+
+      @supports (backdrop-filter: blur(8.1rem)) {
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(8.1rem);
+      }
+    }
+  }
+
+  &__nav-list {
+    position: relative;
+    z-index: 2;
+    list-style: none;
+    padding: 0 0 0 12rem;
+    display: flex;
+    gap: 4.8rem;
+    height: 100%;
+    counter-reset: nav-counter;
+
+    @include responsive("tablet") {
+      padding: 0 4.8rem;
+      gap: 3.7rem;
+    }
+
+    @include responsive("mobile") {
+      flex-direction: column;
+      gap: 3.2rem;
+      padding: 11.8rem 3.2rem 0;
+    }
+  }
+
+  &__nav-list-item {
+    counter-increment: nav-counter;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    @include responsive("mobile") {
+      height: auto;
+    }
+  }
+
+  &__nav-link {
+    color: var(--color-white);
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &::before {
+      content: "0" counter(nav-counter);
+      font-weight: 700;
+      margin-right: 1.4rem;
+
+      @include responsive("tablet") {
+        display: none;
+      }
+
+      @include responsive("mobile") {
+        display: inline;
+        margin-right: 1.2rem;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      border-bottom: 3px solid transparent;
+      height: 100%;
+      width: 100%;
+
+      @include responsive("mobile") {
+        display: none;
+      }
+    }
+
+    &:hover::after {
+      border-bottom: 3px solid var(--color-white);
+      opacity: 0.5;
+    }
+
+    // &.router-link-exact-active::after {
+    //   border-bottom: 3px solid var(--color-white);
+    //   opacity: 1;
+    // }
+  }
+
+  &__nav-active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 3px solid var(--color-white);
+    height: 100%;
+    transition: all 500ms;
+
+    @include responsive("mobile") {
+      display: none;
+    }
+  }
+
+  &__toggle {
+    display: none;
+    margin-right: 2.4rem;
+    width: 2.4rem;
+    height: 2.1rem;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+
+    @include responsive("mobile") {
+      display: flex;
+    }
+
+    span {
+      display: block;
+      height: 0.3rem;
+      width: 100%;
+      background: var(--color-light);
+      transition: all 250ms;
+    }
+  }
+
+  &.mobile &__nav {
+    @include responsive("mobile") {
+      transform: translateX(0);
+    }
+  }
+
+  &.mobile &__toggle {
+    span {
+      &:nth-child(1) {
+        transform-origin: 100% 50%;
+        transform: rotate(-45deg);
+      }
+
+      &:nth-child(2) {
+        width: 0;
+      }
+
+      &:nth-child(3) {
+        transform-origin: 100% 50%;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}

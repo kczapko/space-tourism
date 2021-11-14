@@ -1,0 +1,57 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 1.8rem;
+  color: var(--color-white);
+  font-family: var(--font-barlow);
+  font-weight: 400;
+  background-color: var(--color-dark);
+  overflow-x: hidden;
+
+  @include responsive("tablet") {
+    font-size: 1.6rem;
+  }
+
+  @include responsive("mobile") {
+    font-size: 1.5rem;
+
+    &.home .page {
+      min-height: 66.7rem;
+    }
+
+    &.destination .page {
+      min-height: 85rem;
+    }
+
+    &.crew .page,
+    &.technology .page {
+      min-height: 71rem;
+    }
+  }
+}
+
+.page {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 90rem;
+  height: 100vh;
+
+  @include responsive("tablet") {
+    min-height: 102.4rem;
+  }
+}

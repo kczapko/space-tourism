@@ -1,0 +1,229 @@
+.page--destination {
+  background-image: url("~@/assets/img/destination/background-destination-desktop.jpg");
+
+  @include responsive("tablet") {
+    background-image: url("~@/assets/img/destination/background-destination-tablet.jpg");
+  }
+
+  @include responsive("mobile") {
+    background-image: url("~@/assets/img/destination/background-destination-mobile.jpg");
+  }
+
+  .page__content {
+    width: 100%;
+    max-width: 115rem;
+    margin: 21.2rem auto 0;
+    padding: 0 2rem;
+
+    @include responsive("tablet") {
+      padding: 0 3.9rem;
+      margin-top: 13.6rem;
+    }
+
+    @include responsive("mobile") {
+      max-width: 37.5rem;
+      padding: 0 2.4rem;
+      margin-top: 8.8rem;
+    }
+  }
+
+  .page__header {
+    margin-bottom: 6.4rem;
+
+    @include responsive("tablet") {
+      margin-bottom: 6rem;
+    }
+
+    @include responsive("mobile") {
+      text-align: center;
+      margin-bottom: 3.2rem;
+    }
+
+    h1::before {
+      content: "01";
+      font-weight: 700;
+      opacity: 0.25;
+      margin-right: 2.5rem;
+
+      @include responsive("mobile") {
+        margin-right: 1.8rem;
+      }
+    }
+  }
+
+  .slideshow {
+    display: grid;
+    grid-template-columns: 44.5rem 44.5rem;
+    grid-template-areas: "image nav" "image text";
+    justify-content: space-between;
+
+    @include responsive("tablet") {
+      width: 57.5rem;
+      margin: 0 auto;
+      grid-template-columns: 1fr;
+      grid-template-areas: "image" "nav" "text";
+      justify-items: center;
+    }
+
+    @include responsive("mobile") {
+      width: 100%;
+    }
+
+    &__nav {
+      grid-area: nav;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 3.6rem;
+
+        @include responsive("mobile") {
+          gap: 2.7rem;
+        }
+
+        a {
+          display: block;
+          text-decoration: none;
+          color: var(--color-light);
+          padding-bottom: 1.2rem;
+          border-bottom: 3px solid transparent;
+
+          @include responsive("mobile") {
+            padding-bottom: 0.8rem;
+          }
+
+          &:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+          }
+
+          &.active {
+            color: var(--color-white);
+            border-color: var(--color-white);
+          }
+
+          @include responsive("tablet") {
+            font-size: 1.6rem;
+          }
+
+          @include responsive("mobile") {
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+
+    &__images {
+      grid-area: image;
+      list-style: none;
+      padding: 0;
+      position: relative;
+      align-self: end;
+      transform: translateX(5.5rem);
+
+      @include responsive("tablet") {
+        transform: translateX(0);
+        height: 30rem;
+        aspect-ratio: 1;
+        margin-bottom: 5.6rem;
+      }
+
+      @include responsive("mobile") {
+        height: 17rem;
+        margin-bottom: 2.6rem;
+      }
+
+      li {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 250ms;
+
+        &.active {
+          opacity: 1;
+        }
+      }
+
+      picture,
+      img {
+        display: block;
+        max-width: 100%;
+      }
+    }
+
+    &__content {
+      grid-area: text;
+      list-style: none;
+      padding: 0;
+      position: relative;
+
+      @include responsive("tablet") {
+        width: 100%;
+        text-align: center;
+      }
+
+      li {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 250ms;
+        width: 100%;
+
+        &.active {
+          opacity: 1;
+        }
+      }
+
+      h2 {
+        margin: 3.7rem 0 1.4rem;
+
+        @include responsive("tablet") {
+          margin: 3.2rem 0 0.8rem;
+        }
+
+        @include responsive("mobile") {
+          margin: 2rem 0 0.1rem;
+        }
+      }
+
+      p {
+        color: var(--color-light);
+        line-height: 3.2rem;
+
+        @include responsive("tablet") {
+          line-height: 2.8rem;
+        }
+
+        @include responsive("mobile") {
+          line-height: 2.5rem;
+        }
+      }
+
+      dl {
+        margin-top: 5.4rem;
+        padding-top: 2.8rem;
+        border-top: 1px solid #383b4b;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        @include responsive("tablet") {
+          margin-top: 4.9rem;
+        }
+
+        @include responsive("mobile") {
+          margin-top: 3.2rem;
+          padding-top: 0;
+          display: block;
+        }
+      }
+
+      dt {
+        grid-row: 1;
+        color: var(--color-light);
+        margin-bottom: 1.2rem;
+
+        @include responsive("mobile") {
+          margin-top: 3.2rem;
+        }
+      }
+    }
+  }
+}

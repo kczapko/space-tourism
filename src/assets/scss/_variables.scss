@@ -1,0 +1,31 @@
+:root {
+  --color-white: #fff;
+  --color-light: #d0d6f9;
+  --color-dark: #0b0d17;
+
+  --font-bellefair: "Bellefair", serif;
+  --font-barlow: "Barlow", sans-serif;
+  --font-barlow-condensed: "Barlow Condensed", sans-serif;
+}
+
+$width-laptop: 1439px;
+$width-tablet: 1024px;
+$width-mobile: 640px;
+
+@mixin responsive($name) {
+  @if $name == "laptop" {
+    @media screen and (max-width: $width-laptop) {
+      @content;
+    }
+  }
+  @if $name == "tablet" {
+    @media screen and (max-width: $width-tablet) {
+      @content;
+    }
+  }
+  @if $name == "mobile" {
+    @media screen and (max-width: $width-mobile) {
+      @content;
+    }
+  }
+}

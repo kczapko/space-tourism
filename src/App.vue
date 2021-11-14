@@ -1,30 +1,59 @@
-<template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view />
+<template lang="pug">
+app-header         
+
+main
+  router-view(v-slot="{ Component }")
+    transition(:css="false" @enter="enter" @leave="leave" mode="out-in" appear)
+      component(:is="Component")
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { gsap } from "gsap";
+import AppHeader from "@/components/Header.vue";
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+export default {
+  name: "App",
+  components: {
+    AppHeader,
+  },
+  methods: {
+    enter(el, done) {
+      if (el.classList.contains("page--home")) {
+        gsap.from(el, { opacity: 0, duration: 0.3 });
+        gsap.from(".header-home", { opacity: 0, x: -100, duration: 0.5 });
+        gsap.from(".header-home__link", {
+          opacity: 0,
+          x: 100,
+          duration: 0.5,
+          onComplete: done,
+        });
+      } else {
+        gsap.from(el, { opacity: 0, duration: 0.3, onComplete: done });
+      }
+    },
+    leave(el, done) {
+      if (el.classList.contains("page--home")) {
+        gsap.to(el, { opacity: 0, duration: 0.5 });
+        gsap.to(".header-home", { opacity: 0, x: -100, duration: 0.5 });
+        gsap.to(".header-home__link", {
+          opacity: 0,
+          x: 100,
+          duration: 0.5,
+          onComplete: done,
+        });
+      } else {
+        gsap.to(el, { opacity: 0, duration: 0.5, onComplete: done });
+      }
+    },
+  },
+  watch: {
+    "$route.name": {
+      handler(newVal, oldVal) {
+        document.body.classList.remove(oldVal);
+        document.body.classList.add(newVal);
+      },
+      immediate: true,
+    },
+  },
+};
+</script>
