@@ -18,18 +18,20 @@ export const useSlide = slidesData => {
     if (e.key === "ArrowRight") nextSlide();
   };
 
-  const hammer = new Manager(document.body);
-  const swipe = new Swipe({ direction: DIRECTION_HORIZONTAL });
-  hammer.add(swipe);
-  hammer.on("swipeleft", () => {
-    prevSlide();
-  });
-  hammer.on("swiperight", () => {
-    nextSlide();
-  });
+  let hammer;
 
   onMounted(() => {
     document.addEventListener("keydown", handleKey);
+
+    hammer = new Manager(document.querySelector(".page"));
+    const swipe = new Swipe({ direction: DIRECTION_HORIZONTAL });
+    hammer.add(swipe);
+    hammer.on("swipeleft", () => {
+      nextSlide();
+    });
+    hammer.on("swiperight", () => {
+      prevSlide();
+    });
   });
 
   onUnmounted(() => {
